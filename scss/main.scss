@@ -1,11 +1,66 @@
 $color--black: #000;
 $color--white: #fff;
 
-body {
-  background-color: $color--black;
-  h1 {
-    color: $color--white;
-    font-size: 40px;
+@mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+header {
+  .header__title {
+    min-width: 740px;
     display: flex;
+    flex-direction:column
+  }
+  .title__main {
+    margin: 8vw auto 0;
+  }
+  .main__logo{
+    width: fit-content;
+    height: 220px;
+    color: $color--black;
+    @include center;
+    flex-wrap: wrap;
+    font: {
+      size: clamp(50px, 6vw, 120px);
+      weight: 700;
+    }
+    &--02 {
+      margin: 0 2vw;
+      font-size: clamp(60px, 8vw, 160px);
+      .wrap {
+        position: relative;
+        @include center;
+        img {
+          width: clamp(140px, 18vw, 400px);
+          position: absolute;
+          transform: translateY(-4.2vw);
+        }
+      }
+    }
+  }
+  .title__info {
+    padding: 10px 0;
+    font: {
+      size: clamp(16px, 2vw, 36px);
+      weight: 600;
+    }
+    &--01 {
+      text-align: center;
+    }
+    &--02 {
+      width: fit-content;
+      padding: 6px;
+      margin-left: auto;
+      text-align: center;
+      color: $color--white;
+      background-color: $color--black;
+    }
   }
 }
+
