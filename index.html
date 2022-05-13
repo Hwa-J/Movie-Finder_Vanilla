@@ -7,6 +7,10 @@
   <title>못찾영찾</title>
   <!-- reset -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <!-- font -->
+
+  <!-- icon -->
+  <link rel="stylesheet" href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 </head>
 <body>
 
@@ -16,7 +20,7 @@
       <div class="title__main">
         <a class="main__logo" href="/">
           <div class="tmain__logo--01">
-            ABCD abcd 못 찾는 
+            못 찾는 
           </div>
           <div class="main__logo--02">
             <div class="wrap">
@@ -67,8 +71,10 @@
       </section>
 
       <section class="response">
-        <div class="response__stop">
+        <div class="response__stay">
           <div class="stay">검색해 주세요.</div>
+        </div>
+        <div class="response__loading hidden">
           <div class="loading">구석구석 찾는중...</div>
         </div>
 
@@ -178,6 +184,23 @@
     </div>
 
   </main>
+
+  <div class="modal__error hidden">
+    <div class="error__popup">
+      <div class="popup__inner">
+        <div class="popup__inner--title">
+          <h2>검색어 에러</h2>
+          <span class="material-symbols-outlined popup__close" id="close">
+            close
+          </span>
+        </div>  
+        <div class="popup__inner--main">
+          <span>검색 결과가 없습니다.😢</span>
+          <span>다시 검색해 주세요.</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
