@@ -253,7 +253,8 @@ footer {
 .error__container, 
 .movie_detail__container {
   width: clamp(400px, 50vw, 800px);
-  height: max-content;
+  max-height: 100%;
+  overflow: auto;
   margin: auto;
   background-color: rgba($color--white, $alpha: .8);
   border: 1px solid $color--grashblack ;
@@ -261,7 +262,6 @@ footer {
   box-shadow: 0 8px 32px 0 rgba($color--black, $alpha: .8);
   @include ani-slide-up(.5s);
 }
-
 .modal__inner {
   padding: 20px;
   @include center;
@@ -285,6 +285,9 @@ footer {
     padding: 30px;
     @include center;
     flex-direction: column;
+    span {
+      padding: 10px;
+    }
   }
 }
 
