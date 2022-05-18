@@ -1,5 +1,4 @@
-// font
-@import url('https://fonts.googleapis.com/css2?family=Koulen&display=swap');
+@import "./media.scss";
 
 // 색상 변수
 $color--black: #000;
@@ -27,10 +26,7 @@ $color--grashblack: #222;
   animation-name: slide-up;
   animation-duration: $sec;
 }
-// 반응형 기능 추가시 사용
-// @function ratio ($size, $ratio) {
-//   @return $size * $ratio;
-// }
+
 
 
 // COMMON
@@ -109,9 +105,9 @@ main {
     padding: 20px 0;
     @include center;
     flex-wrap: wrap;
-    input.search-bar {
+    .search-bar {
       padding: 10px;
-      margin-left: 96px;
+
       font-size: 16px;
       flex-grow: 1;
     }
@@ -144,6 +140,8 @@ main {
     margin: auto;
   }
   &__text{
+    word-break: keep-all;
+    text-align: center;
     strong {
       font: {
         size: 18px;
@@ -180,8 +178,6 @@ main {
 }
 .movie {
   margin: 20px;
-  width: 180px;
-  height: 270px;
   border-radius: 16px;
   @include center;
   overflow: hidden;
