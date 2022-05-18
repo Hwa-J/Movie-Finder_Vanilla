@@ -30,6 +30,10 @@ module.exports = {
           'babel-loader',
         ]
       },
+      {
+        test: /\.(png|jpe?g|gif|webp)$/,
+        type: 'asset/resource'
+      }
     ]
   },
 
