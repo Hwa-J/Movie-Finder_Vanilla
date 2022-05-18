@@ -1,66 +1,334 @@
+// font
+@import url('https://fonts.googleapis.com/css2?family=Koulen&display=swap');
+
+// 색상 변수
 $color--black: #000;
 $color--white: #fff;
+$color--gray: #888;
+$color--darkgray: #333;
+$color--grashblack: #222;
 
 @mixin center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(15%);
+  }
+  100%{
+    opacity: 1;
+    transform: translateY();
+  }
+}
+@mixin ani-slide-up ($sec){
+  animation-name: slide-up;
+  animation-duration: $sec;
+}
+// 반응형 기능 추가시 사용
+// @function ratio ($size, $ratio) {
+//   @return $size * $ratio;
+// }
 
+
+// COMMON
+body {
+  color: $color--grashblack;
+}
+div.hidden {
+  display: none;
+}
 a {
   text-decoration: none;
+  display: block;
 }
+img {
+  display: block;
+}
+
+
+// HEADER
 
 header {
   .header__title {
-    min-width: 740px;
+    min-height: 300px;
     display: flex;
-    flex-direction:column
+    flex-direction:column;
   }
-  .title__main {
-    margin: 8vw auto 0;
-  }
+
   .main__logo{
     width: fit-content;
-    height: 220px;
     color: $color--black;
+    padding-top: 30px;
+    margin: auto;
     @include center;
-    flex-wrap: wrap;
     font: {
-      size: clamp(50px, 6vw, 120px);
+      family: 'Koulen', cursive;;
+      size: clamp(24px, 6vw, 74px);
       weight: 700;
     }
-    &--02 {
-      margin: 0 2vw;
-      font-size: clamp(60px, 8vw, 160px);
-      .wrap {
-        position: relative;
-        @include center;
-        img {
-          width: clamp(140px, 18vw, 400px);
-          position: absolute;
-          transform: translateY(-4.2vw);
-        }
-      }
-    }
+    @include ani-slide-up(2s);
   }
+
+
   .title__info {
-    padding: 10px 0;
+    margin: 10px 0 10px auto;
     font: {
-      size: clamp(16px, 2vw, 36px);
-      weight: 600;
+      size: clamp(12px, 1.6vw, 16px);
+      // weight: 600;
     }
-    &--01 {
-      text-align: center;
-    }
-    &--02 {
       width: fit-content;
       padding: 6px;
-      margin-left: auto;
       text-align: center;
       color: $color--white;
+      background-color: $color--gray;
+      @include ani-slide-up(2s);
+  }
+}
+
+
+// MAIN
+
+main {
+  .inner {
+    width: 90%;
+    margin: auto;
+  }
+}
+
+// section__search
+
+.search {
+  @include ani-slide-up(2s);
+
+  &__form {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px 0;
+    @include center;
+    flex-wrap: wrap;
+    input.search-bar {
+      padding: 10px;
+      margin-left: 96px;
+      font-size: 16px;
+      flex-grow: 1;
+    }
+    .btn-search {
+      padding: 10px;
+      margin: 0 20px;
+      border-radius: 50%;
+      color: $color--white;
       background-color: $color--black;
+    }
+    .btn-search:hover {
+      cursor: pointer;
+    }
+    .btn-search:active {
+      color: $color--grashblack;
+      background-color: $color--gray;
     }
   }
 }
 
+
+// section__response
+
+.response {
+  &__text,
+  &__more {
+    @include center;
+    width: fit-content;
+    height: 100px;
+    margin: auto;
+  }
+  &__text{
+    strong {
+      font: {
+        size: 18px;
+        weight: 700;
+      }
+      text-decoration: underline;
+    }
+  }
+  &__text::after {
+    content: "";
+  }
+  &__text.wait::after {
+    content:"검색어를 입력해 주세요.";
+    @include ani-slide-up(3s);
+  }
+  &__more.responsed::after {
+    content: "More";
+  }
+  .response__text.loading::after, 
+  .response__more.loading::after { 
+    content: "";
+    background-image: url(../static/images/loading.gif);
+    width: 250px;
+    height: 250px;
+  }
+}
+
+
+// MOVIE LIST
+
+.movies{
+  @include center;
+  flex-wrap: wrap;
+}
+.movie {
+  margin: 20px;
+  width: 180px;
+  height: 270px;
+  border-radius: 16px;
+  @include center;
+  overflow: hidden;
+  position: relative;
+  background-color: $color--white;
+  box-shadow: 0 2px 16px 0 rgba($color--black, $alpha: .5);
+  transition: .5s;
+  
+  &__poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: auto;
+  }
+  &__info {
+    width: inherit;
+    height: inherit;
+    bottom: 0;
+    text-align: center;
+    font-size: 18px;
+    @include center;
+    flex-direction: column;
+    background-color: rgba($color--black, $alpha: .8);
+    color: $color--white;
+    position: absolute;
+    opacity: 0;
+    transition: .5s;
+    
+    &--title {
+      padding-bottom: 4px;
+    }
+    &--year {
+      font-size: 14px;
+    }
+  }
+}
+.movie:hover {
+  cursor: pointer;
+  box-shadow: 0 8px 32px 0 rgba($color--black, $alpha: .9);
+  transform: scale(1.08);
+  z-index: 1;
+}
+.movie:hover .movie__info {
+  opacity: 1;
+}
+
+
+// FOOTER
+
+footer {
+  height: 50px;
+}
+
+
+// MODAL
+
+.modal__error, 
+.modal__movie_detail {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  @include center;
+  background-color: rgba($color--black, $alpha: .5);
+  backdrop-filter: blur(1.5px);
+  z-index: 2;
+}
+.error__container, 
+.movie_detail__container {
+  width: clamp(400px, 50vw, 800px);
+  height: max-content;
+  margin: auto;
+  background-color: rgba($color--white, $alpha: .8);
+  border: 1px solid $color--grashblack ;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px 0 rgba($color--black, $alpha: .8);
+  @include ani-slide-up(.5s);
+}
+
+.modal__inner {
+  padding: 20px;
+  @include center;
+  flex-direction: column;
+  &--title {
+    width: 100%;
+    padding-bottom: 20px;
+    border-bottom: 1px solid $color--gray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;      
+    font: {
+      size: 18px;
+      weight: 700;
+    }
+    .modal__close {
+      cursor: pointer;
+    }
+  }
+  &--main {
+    padding: 30px;
+    @include center;
+    flex-direction: column;
+  }
+}
+
+.detail {
+  @include center;
+  flex-direction: column;
+  &.loading::after {
+    content: url("../static/images/loading.gif");
+  }
+  &__poster {
+    max-width: 100%; 
+    height: auto;
+  }
+  &__info {
+    @include center;
+    flex-direction: column;
+    li {
+      width: 100%;
+    }
+    li:not(.detail__info--title) {
+      padding-bottom: 14px;
+    }
+    &--title {
+      padding: 20px 0;
+      margin: 20px 0;
+      text-align: center;
+      font: {
+        size: 30px;
+        weight: 800;
+      }
+      border-bottom: 1px solid $color--gray;
+    }
+  }
+  &_name {
+    font: {
+      size: 20px;
+      weight: 700;
+    }
+    color: $color--darkgray;
+  }
+  &_value {
+    padding-top: 4px;
+    font: {
+      size: 18px;
+    }
+  }
+}
