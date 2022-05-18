@@ -105,8 +105,15 @@ function renderMovies (res) {
     // 새로 생성한 각각의 liEl 요소에 클릭 이벤트 설정
     // 클릭된 liEl요소의 id명(imdbID)으로 getMovieDetailInfo 함수 호출
     liEl.addEventListener('click', (e) => {
+
       let imdbID = e.target.parentElement.id
-      getMovieDetailInfo(imdbID)
+
+      if (imdbID) {
+        getMovieDetailInfo(imdbID)
+      }else {
+        imdbID = e.target.parentElement.parentElement.id
+        getMovieDetailInfo(imdbID)
+      }
     })
   })
 }
