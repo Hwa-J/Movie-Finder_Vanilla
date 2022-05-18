@@ -1,17 +1,8 @@
-@import "./media.scss";
+@import "./variables";
+@import "./mixin";
 
-// 색상 변수
-$color--black: #000;
-$color--white: #fff;
-$color--gray: #888;
-$color--darkgray: #333;
-$color--grashblack: #222;
 
-@mixin center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+// Animation
 @keyframes slide-up {
   0% {
     opacity: 0;
@@ -22,12 +13,6 @@ $color--grashblack: #222;
     transform: translateY();
   }
 }
-@mixin ani-slide-up ($sec){
-  animation-name: slide-up;
-  animation-duration: $sec;
-}
-
-
 
 // COMMON
 body {
@@ -329,5 +314,46 @@ footer {
     font: {
       size: 18px;
     }
+  }
+}
+
+
+// media queries
+
+@include mobile {
+  .search__form {
+    flex-direction: column;
+  }
+
+  .search-bar {
+    width: 80%;
+    margin: 10px;
+  }
+
+  .movie {
+    width: 280px;
+    height: ratio(280);
+  }
+}
+
+@include tablet {
+  .search-bar {
+    margin-left: 96px;
+  }
+
+  .movie {
+    width: 240px;
+    height: ratio(240);
+  }
+}
+
+@include desktop {
+  .search-bar {
+    margin-left: 96px;
+  }
+
+  .movie {
+    width: 180px;
+    height: ratio(180);
   }
 }
