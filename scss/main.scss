@@ -47,7 +47,7 @@ header {
     @include center;
     font: {
       family: 'Koulen', cursive;;
-      size: clamp(24px, 6vw, 74px);
+      size: clamp(54px, 8vw, 120px);
       weight: 700;
     }
     @include ani-slide-up(2s);
