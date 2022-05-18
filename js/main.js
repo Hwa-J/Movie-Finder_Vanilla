@@ -80,6 +80,7 @@ function renderMovies (res) {
 
     const liEl = document.createElement('li')
     liEl.classList.add('movie')
+    // liEl 요소가 구분되도록 id명으로 imdbID 설정
     liEl.id = resMovie.imdbID
 
     // 이미지 소스 없을때 대체 이미지 파일로 교체
@@ -88,7 +89,7 @@ function renderMovies (res) {
     }
 
     liEl.innerHTML = `
-      <img src="${resMovie.Poster}" alt="${ resMovie.Title }" class="movie__poster">
+      <img src="${resMovie.Poster}" alt="${ resMovie.Title }" class="movie__poster" loading="lazy">
       <div class="movie__info">
         <div class="movie__info--title">
         ${resMovie.Title}
@@ -101,7 +102,8 @@ function renderMovies (res) {
 
     movieList.append(liEl)
 
-
+    // 새로 생성한 각각의 liEl 요소에 클릭 이벤트 설정
+    // 클릭된 liEl요소의 id명(imdbID)으로 getMovieDetailInfo 함수 호출
     liEl.addEventListener('click', (e) => {
       let imdbID = e.target.parentElement.id
       getMovieDetailInfo(imdbID)
@@ -109,9 +111,9 @@ function renderMovies (res) {
   })
 }
 
-
+// 최초 검색 결과 정보의 다음 페이지들의 정보를 요청하는 함수
 const fetchMore = async () => {
-  // 영화의 총 결과 개수 중 1페이자당 10개씩 나옴 
+  // 총 검색 결과 개수 중 1페이자당 10개씩 출력됨
   totalPages = Math.ceil( totalResults / 10 )
   fetchMoreTrigger.classList.add('loading')
   if (totalPages !== page) {
@@ -122,6 +124,7 @@ const fetchMore = async () => {
   }
   fetchMoreTrigger.classList.remove('loading')
 }
+// fetchMoreTrigger 요소가 화면과 교차할 때 fetchMore 함수 호출
 const fetchMoreObserver = new IntersectionObserver(
   ([{ isIntersecting}]) => {
       if (isIntersecting) {
@@ -129,9 +132,12 @@ const fetchMoreObserver = new IntersectionObserver(
       }
   }
 )
+// fetchMoreTrigger 요소를 관찰 대상으로 설정
 fetchMoreObserver.observe(fetchMoreTrigger)
 
 
+// imdbID 값을 받아 영화 상세정보 요청
+// modalMovie 모달창 호출 및 createDetailInfo 함수 호출
 async function getMovieDetailInfo (imdbID) {
   const OMDB_API_KEY = '7035c60c'
   let res = await fetch(`https://www.omdbapi.com?apikey=${OMDB_API_KEY}&i=${imdbID}`)
@@ -152,6 +158,8 @@ async function getMovieDetailInfo (imdbID) {
 }
 
 
+// 영화 상세정보를 받아 새로 생성한 요소에 정보 담기
+// 정보를 담은 요소를  movieDetailInfo 모달창의 HTML하위요소로 넣어주기
 const createDetailInfo = (resDetail) => { 
   const imgEl = document.createElement('img')
   const ulEl = document.createElement('ul')
@@ -162,6 +170,8 @@ const createDetailInfo = (resDetail) => {
   imgEl.classList.add('detail__poster')
   imgEl.src = resDetail.Poster
   imgEl.alt = resDetail.Title
+  imgEl.loading = "lazy"
+
 
   let ratings = ''
   // Ratings 배열에 정보가 없을 때 에러 모달 방지
